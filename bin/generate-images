@@ -10,7 +10,8 @@ const className = argv.classname || "Images";
 const images = ffs
   .readdirRecursiveSync(source, true, source)
   .filter(file => file.endsWith(".jpg") || file.endsWith(".png"))
-  .map(file => file.replace(/(@2x\.|@3x\.)/g, "."));
+  .map(file => file.replace(/(@2x\.|@3x\.)/g, "."))
+  .filter((item, index, files) => files.indexOf(item) == index);
 
 const flowNeeded = argv.flow || false;
 const flow = flowNeeded ? "\n * @flow" : "";
