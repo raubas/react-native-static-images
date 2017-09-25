@@ -6,6 +6,7 @@ const argv = require("minimist")(process.argv.slice(2), {
 });
 const source = argv._[0];
 const prefix = argv.prefix || "";
+const className = argv.classname || "Images";
 const images = ffs
   .readdirRecursiveSync(source, true, source)
   .filter(file => file.endsWith(".jpg") || file.endsWith(".png"))
@@ -26,7 +27,7 @@ const quote = singleQuote ? "'" : '"';
 const result = `/**
  * WARNING: this file is generated. Don't change it manually.${flow}
  */
-export default class Images {
+export default class ${className} {
 ${images
   .map(
     image =>
